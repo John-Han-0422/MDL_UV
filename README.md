@@ -1,6 +1,6 @@
 # Multimodal deep learning for national-wide mapping of urban vegetation evolution in China with 30-years Landsat archive
 This project contains two deep learning methods for urban vegetation estimation: a multimodal deep learning (MDL) and a deep neural network with progressively growing neurons (pDNN).
-!
+![image](https://github.com/John-hy/MDL_UV/blob/main/dnn.jpg)
 # Our environments
 python 3.8  
 torch 2.0.1  
