@@ -9,7 +9,7 @@ scikit-learn 1.2.2
 numpy 1.24.1  
 pandas 2.0.2
 # Input
-Five categories of features are used for model training:  
+Five categories of features were used for model training:  
 i) reflective bands: blue, green, red, NIR, and SWIR1, and SWIR2;  
 ii) vegetation indices: NDVI and EVI;  
 iii) texture variables based on reflective bands of red, green, blue, and NIR: variance, contrast, entropy, angular second moment, inverse difference moment, and correlation;  
