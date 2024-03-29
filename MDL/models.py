@@ -106,7 +106,6 @@ class mulNet(nn.Module):
                 if 'weight' in name:
                     nn.init.normal_(tensor, mean=0, std=configmul.init_std)
 
-        # 对每个group加入正则
         self.add_regularization_weight(self.firsts.parameters(), l2=configmul.l2_reg)
         if len(sparse_group_index) != 0:
 
@@ -114,7 +113,6 @@ class mulNet(nn.Module):
 
             nn.init.normal_(self.embedding.weight, mean=0, std=configmul.init_std)
 
-        # 对每个embedding加入正则
             self.add_regularization_weight(self.embedding.parameters(), l2=configmul.l2_reg)
 
             self.sparse_hidden_units = [configmul.embedding_dim] + list(configmul.sparse_hidden_units)
@@ -127,7 +125,6 @@ class mulNet(nn.Module):
                 if 'weight' in name:
                     nn.init.normal_(tensor, mean=0, std=configmul.init_std)
 
-        # 对sparse_linears加正则
             self.add_regularization_weight(self.sparse_linears.parameters(), l2=configmul.l2_reg)
         if len(sparse_group_index) != 0:
             self.concat_hidden_units = [group_out + configmul.sparse_hidden_units[-1]] + list(configmul.concat_hidden_units)
@@ -145,7 +142,6 @@ class mulNet(nn.Module):
                 nn.init.normal_(tensor, mean=0, std=configmul.init_std)
         self.dense = nn.Sigmoid()
 
-        # 对concat_linears加正则
         self.add_regularization_weight(self.concat_linears.parameters(), l2=configmul.l2_reg)
 
     def add_regularization_weight(self, weight_list, l1=0.0, l2=0.0):
