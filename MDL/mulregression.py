@@ -11,10 +11,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.utils import shuffle
 
 def random_strati_smp(samples, num):
-    '''随机分层抽样，输入样本和数量'''
     num = int(num/10)
-
-
     # Divide the training data into 10 equivalent intervals by y
     samples['y_interval'] = pd.cut(samples['gcr'], bins=10)
 
@@ -58,7 +55,6 @@ columns_to_normalize = ['F3_r_con', 'F3_r_ent', 'F3_r_var', 'F3_r_ASM', 'F3_r_ID
                  'F4_elev', 'F4_slope']
 
 is_sparse = True
-# 定义训练数据
 data = pd.read_csv("samples.csv")
 scaler = StandardScaler()
 data[columns_to_normalize] = scaler.fit_transform(data[columns_to_normalize])
