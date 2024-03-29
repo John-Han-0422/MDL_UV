@@ -21,7 +21,6 @@ class LinearFloat64(nn.Module):
     def forward(self, input):
         return nn.functional.linear(input, self.weight.type(torch.float64), self.bias.type(torch.float64))
 
-# 用法示例
 linear_layer = LinearFloat64(in_features=10, out_features=5)
 def activation_layer(act_name):
     if act_name.lower() == 'sigmoid':
@@ -39,7 +38,6 @@ def activation_layer(act_name):
         act_layer = nn.LeakyReLU()
     return act_layer
 
-# 定义神经网络模型
 class Net(nn.Module):
     def __init__(self, config, kinds, inputs_dim):
         super(Net, self).__init__()
