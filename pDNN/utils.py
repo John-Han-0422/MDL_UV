@@ -91,7 +91,7 @@ def train(config, model, train_iter, dev_iter):
     writer = SummaryWriter(log_dir=config.log_path + time.strftime('%m-%d_%H.%M', time.localtime()))
     for epoch in range(config.num_epochs):
 
-        # scheduler.step() # 学习率衰减
+        # scheduler.step() 
         for i, (trains, labels) in enumerate(train_iter):
             trains = trains.cuda()
             labels = labels.cuda()
@@ -171,7 +171,7 @@ def evaluate_test(config, model, data_iter):
     predict_all = np.array([], dtype=int)
     labels_all = np.array([], dtype=int)
     criterion = torch.nn.MSELoss()
-    with torch.no_grad():  # 不追踪梯度
+    with torch.no_grad():  
         for texts, labels in data_iter:
             texts = texts.cuda()
             outputs = model(texts)
