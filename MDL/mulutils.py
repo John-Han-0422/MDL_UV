@@ -13,7 +13,7 @@ class configmul(object):
     def __init__(self):
         self.save_path = './models/'
         self.log_path = './logs/'
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else 'cpu')  # 设备
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else 'cpu')  
         self.require_improvement = 50
         self.num_epochs = 2800
         self.batch_size = 30000
@@ -32,7 +32,7 @@ class configmul(object):
 class DatasetIterater(object):
     def __init__(self, batches, batch_size, device):
         self.batch_size = batch_size
-        self.batches = batches  # 数据集
+        self.batches = batches  
         self.n_batches = len(batches) // batch_size
         self.residue = False
         if len(batches) % self.batch_size != 0:
@@ -49,8 +49,8 @@ class DatasetIterater(object):
         return x.float(), y.float()
 
     def __next__(self):
-        if self.residue and self.index == self.n_batches: # 如果batch外还剩下一点句子，并且迭代到了最后一个batch
-            batches = self.batches[self.index * self.batch_size: len(self.batches)] # 直接拿出剩下的所有数据
+        if self.residue and self.index == self.n_batches:
+            batches = self.batches[self.index * self.batch_size: len(self.batches)] 
             self.index += 1
             batches = self._to_tensor(batches)
             return batches
@@ -58,10 +58,10 @@ class DatasetIterater(object):
         elif self.index >= self.n_batches:
             self.index = 0
             raise StopIteration
-        else: # 迭代器的入口，刚开始self.index是0，肯定小于self.n_batches
-            batches = self.batches[self.index * self.batch_size: (self.index + 1) * self.batch_size] # 正常取一个batch的数据
+        else:
+            batches = self.batches[self.index * self.batch_size: (self.index + 1) * self.batch_size] 
             self.index += 1
-            batches = self._to_tensor(batches) # 转化为tensor
+            batches = self._to_tensor(batches) 
             return batches
 
     def __iter__(self):
@@ -95,7 +95,7 @@ def train(config, model, train_iter, dev_iter):
     writer = SummaryWriter(log_dir=config.log_path + time.strftime('%m-%d_%H.%M', time.localtime()))
     for epoch in range(config.num_epochs):
 
-        # scheduler.step() # 学习率衰减
+        # scheduler.step() 
         for i, (trains, labels) in enumerate(train_iter):
             trains = trains.cuda()
             labels = labels.cuda()
